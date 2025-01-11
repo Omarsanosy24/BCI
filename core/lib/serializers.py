@@ -1,19 +1,13 @@
-from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-
-
-class BaseModelSerializer(serializers.HyperlinkedModelSerializer):
-    id = serializers.IntegerField(read_only=True)
-    str = serializers.ReadOnlyField(source="__str__")
 
 
 def make_serializer_class(model_, *fields_):
     if not fields_:
         fields_ = "__all__"
     else:
-        fields_ = ["id", "url", *fields_]
+        fields_ = ["id", *fields_]
 
-    class _Serializer(BaseModelSerializer):
+    class _Serializer(ModelSerializer):
         class Meta:
             model = model_
             fields = fields_

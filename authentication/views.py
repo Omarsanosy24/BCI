@@ -62,7 +62,7 @@ class LoginAPIView(generics.GenericAPIView):
 
 class UserInfoView(generics.GenericAPIView):
     serializer_class = UserInfoSer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
         ser = self.serializer_class(request.user, context={"request": request})

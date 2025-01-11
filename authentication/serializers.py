@@ -103,4 +103,4 @@ class SetNewPasswordSerializer(serializers.Serializer):
             raise AuthenticationFailed("The reset link is invalid", 401)
 
 
-UserInfoSer = make_serializer_class(User)
+UserInfoSer = make_serializer_class(User, "email", "first_name", "last_name", "phone")

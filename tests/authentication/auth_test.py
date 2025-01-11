@@ -1,5 +1,5 @@
 from faker import Faker
-
+from authentication.models import User
 fake = Faker()
 email = fake.email()
 
@@ -58,4 +58,19 @@ def test_login(client, db):
     )
     assert rp2.status_code == 400, rp2.data
     assert "status" in rp2.data and "message" in rp2.data
+
+
+def test_user_info(client, db):
+    test_create_user(client, db)
+    user = User.objects.first()
+    access_token = user.get_tokens_for_user()['access']
+    rp = client.get(
+        '/auth/profile/',
+        HTTP_AUTHORIZATION=f"Bearer {access_token}"
+    )
+    assert rp.status_code == 200, rp.data
+    assert "status" in rp.data and "message" in rp.data
+    assert "first_name" in rp.data['data']
+    assert "last_name" in rp.data['data']
+    assert "email" in rp.data['data']
 
