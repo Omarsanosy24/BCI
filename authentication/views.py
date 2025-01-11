@@ -25,7 +25,8 @@ class RegisterView(generics.GenericAPIView):
                 status=status.HTTP_200_OK,
             )
         data = serializer.data
-        data['token'] = user.get_tokens_for_user()
+        tokens = user.get_tokens_for_user()
+        data['token'] = tokens
         return Response(
             {
                 "status": True,

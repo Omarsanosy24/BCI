@@ -11,7 +11,7 @@ from rest_framework.exceptions import ValidationError, AuthenticationFailed
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=68, min_length=6, write_only=True)
-    token = serializers.CharField(max_length=2000, min_length=3, read_only=True)
+    token = serializers.JSONField(read_only=True)
     email = serializers.EmailField(max_length=68, min_length=6, )
 
     class Meta:
@@ -41,7 +41,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 class LoginSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=68, min_length=6, write_only=True)
-    token = serializers.CharField(max_length=2000, min_length=3, read_only=True)
+    token = serializers.JSONField(read_only=True)
     email = serializers.EmailField(required=True, write_only=True)
 
     class Meta:
