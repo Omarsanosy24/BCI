@@ -43,7 +43,13 @@ pip install -r requirements.txt
 5. تشغيل السيرفر المحلي
 لتشغيل المشروع على السيرفر المحلي:
 ```
-./start
+./start.sh
+```
+OR you can use this command
+```
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
 ```
 ثم افتح المتصفح على العنوان التالي:
 
